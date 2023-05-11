@@ -7,8 +7,9 @@ Minimum operations to reach H characters
 
 def minOperations(n):
     """
-    Given a number n, write a method that calculates the fewest number of operations 
-    needed to result in exactly n H characters in the file.
+    Given a number n, write a method that calculates the fewest
+    number of operations needed to result in exactly n H
+    characters in the file.
 
     Args:
         n (int): The desired number of H characters
