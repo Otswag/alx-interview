@@ -45,3 +45,4 @@ def minOperations(n):
     # if no factor of n is found, return 0 (impossible to achieve)
 
     return 0
+
