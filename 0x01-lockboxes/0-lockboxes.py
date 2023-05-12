@@ -1,24 +1,34 @@
 #!/usr/bin/python3
 """
-Module that contains a function that determines if all boxes can be unlocked
+Determines if all the boxes can be opened
 """
-
 
 def canUnlockAll(boxes):
     """
-    Determines if all boxes can be unlocked.
-    Args:
-        boxes (list): A list of lists containing the keys.
-    Returns:
-        bool: True if all boxes can be unlocked, False otherwise.
+    Returns True if all boxes can be opened, else False
     """
-    n = len(boxes)
-    keys = [0] + boxes[0]
-    unlocked = set(keys)
-    for key in keys:
-        if key < n:
-            for box in boxes[key]:
-                if box not in unlocked:
-                    unlocked.add(box)
-                    keys.append(box)
-    return len(unlocked) == n
+    if not boxes:
+        return False
+
+    # Create a set of the box indices, and mark box 0 as opened
+    box_indices = set(range(len(boxes)))
+    opened_boxes = {0}
+
+    # Iterate through the list of boxes
+    while box_indices:
+        # Get the set of keys in the opened boxes
+        keys = set(key for box in opened_boxes for key in boxes[box])
+
+        # Find the set of boxes that can be opened with the keys
+        openable_boxes = box_indices.intersection(keys)
+
+        # If there are no more openable boxes, break out of the loop
+        if not openable_boxes:
+            break
+
+        # Mark the openable boxes as opened, and remove them from the set of unopened boxes
+        opened_boxes.update(openable_boxes)
+        box_indices.difference_update(openable_boxes)
+
+    # Return True if all boxes have been opened, else False
+    return not box_indices
