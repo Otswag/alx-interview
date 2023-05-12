@@ -4,11 +4,13 @@ Module of Pascal's triangle of n
 '''
 
 
-def pascal_triangle(n):
+from typing import List
+def pascal_triangle(n: int) -> List[List[int]]:
     if n <= 0:
         return []
 
     triangle = [[1]]
+
     for i in range(1, n):
         row = [1]
         for j in range(1, i):
@@ -17,3 +19,14 @@ def pascal_triangle(n):
         triangle.append(row)
 
     return triangle
+
+def print_triangle(triangle):
+    """
+    Print the triangle
+    """
+    for row in triangle:
+        print("[{}]".format(",".join([str(x) for x in row])))
+
+
+if __name__ == "__main__":
+    print_triangle(pascal_triangle(5))
