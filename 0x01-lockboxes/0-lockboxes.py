@@ -1,5 +1,7 @@
 #!/usr/bin/python3
-"""Module that contains a function that determines if all boxes can be unlocked"""
+"""
+Module that contains a function that determines if all boxes can be unlocked
+"""
 
 
 def canUnlockAll(boxes):
