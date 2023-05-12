@@ -5,6 +5,8 @@ Module of Pascal's triangle of n
 
 
 from typing import List
+
+
 def pascal_triangle(n: int) -> List[List[int]]:
     if n <= 0:
         return []
@@ -19,6 +21,7 @@ def pascal_triangle(n: int) -> List[List[int]]:
         triangle.append(row)
 
     return triangle
+
 
 def print_triangle(triangle):
     """
