@@ -5,34 +5,20 @@ Module that determines if all the boxes can be opened.
 
 
 def canUnlockAll(boxes):
-    if not boxes:
-        return False
+    """
+    Prototype that determines if all the boxes can be opened.
+    """
+    size = len(boxes)  # size of the list of boxes.
+    checkbox = {}  # dictionary that will contain the boxes that can be opened.
+    index = 0  # index of the box that will be checked.
 
-    # create a set to keep track of opened boxes
-    opened_boxes = set()
-
-    # add the first box (index 0) to the set of opened boxes
-    opened_boxes.add(0)
-
-    # create a queue to keep track of boxes that have not yet been opened
-    queue = boxes[0]
-
-    while queue:
-        # pop a box from the front of the queue
-        box = queue.pop(0)
-
-        # if the box has not already been opened
-        if box not in opened_boxes:
-            # add the box to the set of opened boxes
-            opened_boxes.add(box)
-
-            # add the keys in this box to the queue
-            for key in boxes[box]:
-                queue.append(key)
-
-    # if the set of opened boxes contains all the boxes, return True
-    if len(opened_boxes) == len(boxes):
-        return True
-
-    # otherwise, return False
+    for keys in boxes:  # for each box in the list of boxes.
+        if len(keys) == 0 or index == 0:
+            checkbox[index] = -1
+        for key in keys:
+            if key < size and key != index:
+                checkbox[key] = key  # the box is added to the dictionary.
+        if len(checkbox) == size:
+            return True  # all the boxes can be opened.
+        index += 1
     return False
