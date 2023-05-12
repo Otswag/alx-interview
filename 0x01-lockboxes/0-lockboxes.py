@@ -3,6 +3,7 @@
 Determines if all the boxes can be opened
 """
 
+
 def canUnlockAll(boxes):
     """
     Returns True if all boxes can be opened, else False
@@ -26,7 +27,9 @@ def canUnlockAll(boxes):
         if not openable_boxes:
             break
 
-        # Mark the openable boxes as opened, and remove them from the set of unopened boxes
+        # Mark the openable boxes as opened, and remove them
+
+        # from the set of unopened boxes
         opened_boxes.update(openable_boxes)
         box_indices.difference_update(openable_boxes)
 
