@@ -1,10 +1,6 @@
 #!/usr/bin/python3
 """
-<<<<<<< HEAD
 Module that determines if all the boxes can be opened.
-=======
-Module that contains a function that determines if all boxes can be unlocked
->>>>>>> d307abcaab3bf565ff6ffde9dd790bd0f1378786
 """
 
 
