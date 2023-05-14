@@ -1,50 +1,41 @@
 #!/usr/bin/python3
+
 """
-log parsing
+Script that reads a log file line by line and computes metrics
 """
 
-import sys
 import re
 
+# Define regular expression pattern to match log entries
+LOG_PATTERN = r'(\d+\.\d+\.\d+\.\d+) - - \[(.*?)\] "(.*?)" (\d+) (\d+)'
 
-def output(log: dict) -> None:
-    """
-    helper function to display stats
-    """
-    print("File size: {}".format(log["file_size"]))
-    for code in sorted(log["code_frequency"]):
-        if log["code_frequency"][code]:
-            print("{}: {}".format(code, log["code_frequency"][code]))
+# Create dictionary to store status code counts
+STATUS_CODES =
+{'200': 0, '301': 0, '400': 0, '401': 0, '403': 0, '404': 0, '405': 0,
+ '500': 0}
 
+# Initialize total size counter
+TOTAL_SIZE = 0
 
-if __name__ == "__main__":
-    regex = re.compile(
-    r'\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3} - \[\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}.\d+\] "GET /projects/260 HTTP/1.1" (.{3}) (\d+)')  # nopep8
+# Open log file and read each line
+with open('access.log') as log_file:
+    for line in log_file:
+        # Match log entry to pattern
+        match = re.match(LOG_PATTERN, line)
+        if match:
+            # Extract status code and request size from log entry
+            status_code = match.group(4)
+            size = int(match.group(5))
 
-    line_count = 0
-    log = {}
-    log["file_size"] = 0
-    log["code_frequency"] = {
-        str(code): 0 for code in [
-            200, 301, 400, 401, 403, 404, 405, 500]}
+            # Increment status code count and total size
+            if status_code in STATUS_CODES:
+                STATUS_CODES[status_code] += 1
+            TOTAL_SIZE += size
 
-    try:
-        for line in sys.stdin:
-            line = line.strip()
-            match = regex.fullmatch(line)
-            if (match):
-                line_count += 1
-                code = match.group(1)
-                file_size = int(match.group(2))
+            # Print status code counts every 10 entries
+            if len(STATUS_CODES) % 10 == 0:
+                print("Status code counts:", STATUS_CODES)
 
-                # File size
-                log["file_size"] += file_size
-
-                # status code
-                if (code.isdecimal()):
-                    log["code_frequency"][code] += 1
-
-                if (line_count % 10 == 0):
-                    output(log)
-    finally:
-        output(log)
+# Print final status code counts and total size
+print("Status code counts:", STATUS_CODES)
+print("Total size:", TOTAL_SIZE)
