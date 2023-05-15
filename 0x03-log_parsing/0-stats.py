@@ -4,6 +4,7 @@
 Script that reads a log file line by line and computes metrics
 """
 
+import sys
 import re
 
 # Define regular expression pattern to match log entries
