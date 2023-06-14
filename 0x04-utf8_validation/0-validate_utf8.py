@@ -2,6 +2,7 @@
 
 """UTF-8 Validation"""
 
+
 def validUTF8(data):
 
     """Determines if a given data set
