@@ -1,7 +1,6 @@
 #!/usr/bin/node
 
 const request = require('request');
-
 const movieId = process.argv[2];
 
 if (!movieId) {
@@ -23,7 +22,6 @@ request(apiUrl, (error, response, body) => {
     }
 
     const movieData = JSON.parse(body);
-
     const characterPromises = movieData.characters.map((characterUrl) => {
 	return new Promise((resolve, reject) => {
 	    request.get(characterUrl, (error, response, body) => {
