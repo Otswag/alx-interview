@@ -2,14 +2,17 @@
 
 """Script that reads stdin line by line and computes metrics"""
 
+import random
 import sys
+from time import sleep
+import datetime
 
 
 def printsts(dic, size):
     """ WWPrints information """
     print("File size: {:d}".format(size))
     for i in sorted(dic.keys()):
-        if dic[i] >= 0:
+        if dic[i] != 0:
             print("{}: {:d}".format(i, dic[i]))
 
 
